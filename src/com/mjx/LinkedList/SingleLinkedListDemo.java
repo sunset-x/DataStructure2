@@ -14,6 +14,14 @@ public class SingleLinkedListDemo {
         singleLinkedList.add(n4);
         singleLinkedList.add(n2);
 
+        HeroNode newN2 = new HeroNode(2,"露露","玉麒麟2");
+        HeroNode newN3 = new HeroNode(8,"11","222");
+        singleLinkedList.update(newN2);
+//        singleLinkedList.update(newN3);
+        System.out.println("修改后的链表：");
+        singleLinkedList.list();
+        System.out.println("删除节点2：");
+        singleLinkedList.del(2);
         singleLinkedList.list();
     }
 }
@@ -70,6 +78,55 @@ class SingleLinkedList{
             }
             System.out.println(temp);
             temp = temp.next;
+        }
+    }
+
+    // 修改节点：修改节点内容 no不能修改 即根据no修改内容
+    public void update(HeroNode heroNode){
+        if (head.next == null){
+            System.out.println("链表为空");
+            return;
+        }
+        //先用辅助变量找到no 如果找到再修改
+        HeroNode tempNode = head.next;
+
+        while (true){
+            if (tempNode==null){
+                System.out.println("未找到");
+                break;
+            }
+            if (tempNode.no == heroNode.no){
+                //找到
+                tempNode.name = heroNode .name;
+                tempNode.nickName = heroNode.nickName;
+                System.out.println("已修改");
+                break;
+            }
+            tempNode = tempNode.next;
+        }
+    }
+    // 删除节点
+    public void del(int no){
+        if(head.next == null){
+            System.out.println("链表为空");
+        }
+
+        HeroNode tempNode = head;
+        while (true){
+            if (tempNode.next == null){
+                System.out.println("没有该节点");
+                break;
+            }
+            if (tempNode.next.no == no){
+                if (tempNode.next.next == null){
+                    tempNode.next = null;
+                }else{
+                    tempNode.next = tempNode.next.next;
+                }
+                System.out.println("删除成功");
+                break;
+            }
+            tempNode = tempNode.next;
         }
 
     }
